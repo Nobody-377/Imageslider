@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Slider</title>
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("./background1.jpg");
+        background-size: cover;
+        background-position: center;
+        font-family: system-ui, sans-serif;
+    }
+
+    
+
+    .slider {
+        width: 320px;
+        padding: 16px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        
+    }
+
+    .slider img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: none;
+        border-radius: 12px;
+    }
+
+    button {
+        margin: 12px 6px 0;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        background-color: #ff9db0;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    button:hover {
+        background-color: #f07488;
+    }
+</style>
+
+
+</head>
+<body>
+
+<div class="slider">
+    <img src="./nature1.jpeg">
+    <img src="./nature2.jpeg">
+    <img src="./nature3.jpeg">
+    <img src="./nature4.jpeg">
+
+    <br>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+</div>
+
+<script>
+    let images = document.getElementsByTagName("img");
+    let index = 0
+    let timer
+
+    function showImage() {
+        for (let i = 0; i < images.length; i++) {
+            images[i].style.display = "none"
+        }
+        images[index].style.display = "block"
+    }
+
+    function startAutoSlide() {
+        timer = setInterval(next, 3000)
+    }
+
+    function next() {
+        clearInterval(timer)
+        index++
+        if (index >= images.length) {
+            index = 0
+        }
+        showImage()
+        startAutoSlide()
+    }
+
+    function prev() {
+        clearInterval(timer)
+        index--
+        if (index < 0) {
+            index = images.length - 1
+        }
+        showImage()
+        startAutoSlide()
+    }
+    showImage()
+    startAutoSlide()
+</script>
+
+</body>
+</html>
